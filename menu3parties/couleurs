@@ -1,4 +1,5 @@
-##
+## couleurs lors de l’exécution de script
+#
 # Color Variables
 ##
 green='\e[32m'
