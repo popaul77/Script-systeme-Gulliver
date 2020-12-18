@@ -51,10 +51,10 @@ function all_checks() {
 ##
 # Color Variables
 ##
-green='\e[32m'
-blue='\e[34m'
-clear='\e[0m'
-red='\e[0;31m'
+green='\e[32m' # color green
+blue='\e[34m'  # color blue
+clear='\e[0m'  # back 2 color system
+red='\e[0;31m'  # color red
 
 ##
 # Color Functions
@@ -76,12 +76,12 @@ ColorRed(){
 ##
 
 incorrect_selection() {
-  echo $(ColorRed 'Selection incorrecte! Essaye encore.')
+  echo $(ColorRed 'Incorrect_selection! Try again.')
 }
 
 press_enter() {
   echo ""
-  echo -n " Appuyer sur Entrée pour continuer "
+  echo -n " Press Enter to continue "
   read
   clear
 }
