@@ -67,3 +67,16 @@ function checkdisk()
         echo $space_use
       done
 }
+
+function usedisk()
+{
+    espacevar=$(du -sh /var)
+    espacevarlib=$(du -sh /var/lib)
+    espacevarcache=$(du -sh /var/cache)
+
+    echo "Espace disque utilisé de :"
+    echo $espacevarlib
+    echo $espacevarlib
+    echo $espacevarcache
+
+}
