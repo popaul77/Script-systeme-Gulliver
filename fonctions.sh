@@ -62,7 +62,7 @@ for disk in $(df |grep dev |grep -v tmpfs |grep -v udev| awk -F" " '{print $1}' 
     do
       echo $disk
 
-        space_use=$(df -Th | grep "$disk" | awk -F" " '{print $5}' | cut -d% -f1)
+        space_use=$(df | grep "$disk" | awk -F" " '{print $5}' | cut -d% -f1)
 
       echo $space_use
 }
