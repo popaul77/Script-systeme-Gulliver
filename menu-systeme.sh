@@ -1,11 +1,12 @@
 #!/bin/bash
-
 ##
-# BASH menu script that checks:
-# - Memory usage
-# - CPU load
-# - Number of TCP connections
-# - Kernel version
+
+
+# BASH menu: script de test du systeme:
+# - Utilisation memoire
+# - Charge CPU
+# - Nombre de connections TCP
+# - Version du noyau
 ##
 
 server_name=$(hostname)
