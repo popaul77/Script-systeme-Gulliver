@@ -37,7 +37,7 @@ echo -ne " Information systeme
         $(ColorGreen '3)') Nombre de connections TCP
         $(ColorGreen '4)') Version du noyau
         $(ColorGreen '5)') Tous les tests
-        $(ColorGreen '0)') Sortir du script
+        $(ColorGreen '0)') Sortir du menu
         $(ColorBlue 'Choisir une option:') "
 
         read a
