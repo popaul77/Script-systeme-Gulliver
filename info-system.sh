@@ -37,6 +37,8 @@ echo -ne " Information systeme
         $(ColorGreen '3)') Nombre de connections TCP
         $(ColorGreen '4)') Version du noyau
         $(ColorGreen '5)') Tous les tests
+        $(ColorGreen '6)') Espace_disque
+        $(ColorGreen '7)') Suis je ROOT
         $(ColorGreen '0)') Sortir du menu
         $(ColorBlue 'Choisir une option:') "
 
@@ -48,6 +50,8 @@ echo -ne " Information systeme
 	        3) tcp_check ; menu ;;
 	        4) kernel_check ; menu ;;
 	        5) all_checks ; menu ;;
+          6) checkdisk ; menu ;;
+          7) checkuid ; menu ;;
 		      0) exit 0 ;;
           * ) clear ; incorrect_selection ; press_enter ;;
 		    esac

@@ -44,25 +44,26 @@ function all_checks() {
 
 function checkuid()
 {
-  if [ "$UID" -ne "$1" ]
+  if [ "$UID" -ne "0" ]
 
     then
-          echo -e "${RED} [ ERROR ]" "${NC} you must be root to install the server"
+          echo -e "$(ColorRed '[ ERROR ]')" "Vous devez etre root pour faire cette installation"
           exit 0
 
     else
-          echo -e "${GREEN} [ OK ]" "${NC} UID ok, install in progress..."
+          echo -e "$(ColorGreen '[ OK ]')" "UID ROOT ok, L'installation peut continuer........"
 
 fi
 }
 
-function espace_disque()
+function checkdisk()
 {
-for disk in $(df |grep dev |grep -v tmpfs |grep -v udev| awk -F" " '{print $1}' | cut -d/ -f3)
-    do
-      echo $disk
+  for disk in $(df |grep dev |grep -v tmpfs |grep -v udev| awk -F" " '{print $1}' | cut -d/ -f3)
+      do
+        echo $disk
 
-        space_use=$(df -Th | grep "$disk" | awk -F" " '{print $4 "/" $5}' | cut -d% -f1)
+          space_use=$(df -Th | grep "$disk" | awk -F" " '{print $4 " / " $5}' | cut -d% -f1)
 
-      echo $space_use
+        echo $space_use
+      done
 }
