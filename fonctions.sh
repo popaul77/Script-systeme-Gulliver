@@ -47,16 +47,14 @@ function checkuid()
   if [ "$UID" -ne "0" ]
 
     then
-          echo -e "$(ColorRed '[ ERROR ]')" "Vous devez etre root pour faire cette installation"
+          echo -e "$(ColorRed '[ ERROR ]')" "Vous devez etre root pour lancer cette commande......."
           exit 0
 
     else
-          echo -e "$(ColorGreen '[ OK ]')" "UID ROOT ok, L'installation peut continuer........"
+          echo -e "$(ColorGreen '[ UID ROOT OK ]')" " L'execution peut continuer........"
 
 fi
 }
-
-############# serie a tester ####################""
 
 function checkuiduser()
 {
@@ -67,7 +65,7 @@ function checkuiduser()
           exit 0
 
     else
-          echo -e "$(ColorGreen '[ OK ]')" "UID USER ok, L'execution peut continuer........"
+          echo -e "$(ColorGreen '[ UID USER OK ]')" " L'execution peut continuer........"
 
 fi
 }
@@ -91,8 +89,8 @@ function usedisk()
     espacevarlib=$(du -sh /var/lib)
     espacevarcache=$(du -sh /var/cache)
 
-    echo "Espace disque utilisé de :"
-    echo $espacevarlib
+    echo "L'éspace disque utilisé est de :"
+    echo $espacevar
     echo $espacevarlib
     echo $espacevarcache
 
@@ -103,7 +101,20 @@ function internetok()
   nc -z 8.8.8.8 53  >/dev/null 2>&1
     online=$?
       if [ $online -eq 0 ]; then
-          echo echo -e "$(ColorGreen '[ OK ]')" "Connexion internet active"
+          echo -e "$(ColorGreen '[ OK ]')" "Connexion internet active sur:"
+            ip -o -4 addr | awk '!/^[0-9]*: ?lo|link\/ether/{print $2" "$4}'
+
+          echo -e "$(ColorGreen '[ IP EXTERNE ]')" "Adresse IP du routeur:"
+            curl ifconfig.me
+
+            echo ""
+
+              if [ $? -eq 0 ]; then
+                echo -e "$(ColorGreen '[ ACCES INTERNET OK ]')"
+              else
+                echo -e "$(ColorRed '[ ACCES INTERNET FAILED ]')"
+              fi
+
         else
           echo echo -e "$(ColorRed '[ ERROR ]')" " Pas de connexion internet "
       fi
