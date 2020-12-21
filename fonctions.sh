@@ -56,6 +56,23 @@ function checkuid()
 fi
 }
 
+############# serie a tester ####################""
+
+function checkuiduser()
+{
+  if [ "$UID" -eq "0" ]
+
+    then
+          echo -e "$(ColorRed '[ ERROR ]')" "Vous ne devez etre root pour lancer cette commande"
+          exit 0
+
+    else
+          echo -e "$(ColorGreen '[ OK ]')" "UID USER ok, L'execution peut continuer........"
+
+fi
+}
+
+
 function checkdisk()
 {
   for disk in $(df |grep dev |grep -v tmpfs |grep -v udev| awk -F" " '{print $1}' | cut -d/ -f3)
@@ -79,4 +96,15 @@ function usedisk()
     echo $espacevarlib
     echo $espacevarcache
 
+}
+
+function internetok()
+{
+  nc -z 8.8.8.8 53  >/dev/null 2>&1
+    online=$?
+      if [ $online -eq 0 ]; then
+          echo echo -e "$(ColorGreen '[ OK ]')" "Connexion internet active"
+        else
+          echo echo -e "$(ColorRed '[ ERROR ]')" " Pas de connexion internet "
+      fi
 }
