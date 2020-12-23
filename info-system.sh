@@ -17,7 +17,7 @@ source couleurs
 
 ## c'est parti
 clear; checkuiduser
-
+ncduinstall
 ##
 # menu options
 ##

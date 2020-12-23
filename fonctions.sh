@@ -8,6 +8,16 @@
 ## nom de la machine
 server_name=$(hostname)
 
+# Verifier que ncdu est installer
+function ncduinstall(){
+  if [ $(dpkg-query -W -f='${Status}' ncdu 2>/dev/null | grep -c "ok installed") -eq 0 ];
+  then
+    echo -e "$(ColorRed '[ Le paquet NCDU n est pas installé. Installer le avant de continuer]')"
+    exit 0
+  fi
+
+}
+
 # Etat de la memoire
 function memory_check() {
   echo ""
