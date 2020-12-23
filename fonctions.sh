@@ -108,9 +108,6 @@ function usedisk()
      echo -e "${orange} [ ########## [ Volume utiliser dans /var de${clear}${red} ${server_name}${clear}${orange} ########## ]${clear} "
   echo ""
 
-<<<<<<< HEAD
-        space_use=$(df | grep "$disk" | awk -F" " '{print $5}' | cut -d% -f1)
-=======
     espacevar=$(du -sh /var)
     espacevarlib=$(du -sh /var/lib)
     espacevarcache=$(du -sh /var/cache)
@@ -179,7 +176,6 @@ function ncdudiskusage()
   echo ""
       echo -e "${orange} [ ########## [ Controle volume dossier ou partition sur ${clear}${red} ${server_name}${clear}${orange} ########## ]${clear} "
   echo ""
->>>>>>> dev-menu
 
   echo -e "$(ColorOrange '[ Entrer le chemin du dossier a scaner: ]')"
   echo -e "${green} [ Mettre le ${greenbold}chemin complet${clear}${green} du dossier. Exemple /var/log ]${clear} "
