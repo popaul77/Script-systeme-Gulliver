@@ -15,17 +15,17 @@ source fonctions.sh
 # Début du script
 clear; checkuiduser
 echo ""
-echo "########## Conversion jpg 2 png #########################################"
+echo "_________________________________________________________"
 convertjpg2png
 echo ""
-echo "########## Verification de l'état de la connexion internet ##############"
+echo "_________________________________________________________"
 internetok
 echo ""
-echo "########## Etat occupation partition ou dossier #########################"
+echo "_________________________________________________________"
 ncdudiskusage
 echo ""
-echo "########## Etat occupation disque dur ###################################"
+echo "_________________________________________________________"
 checkdisk
 echo ""
-echo "########## Verification du volume de données dans /var ##################"
+echo "_________________________________________________________"
 checkuid; usedisk
