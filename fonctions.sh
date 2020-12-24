@@ -12,7 +12,7 @@ server_name=$(hostname)
 function ncduinstall(){
   if [ $(dpkg-query -W -f='${Status}' ncdu 2>/dev/null | grep -c "ok installed") -eq 0 ];
   then
-    echo -e "$(ColorRed '[ Le paquet NCDU n est pas installé. Installer le avant de continuer]')"
+    echo -e "$(ColorRed '[ Le paquet NCDU n est pas installé. Installer le avant de continuer ]')"
     exit 0
   fi
 
@@ -21,7 +21,7 @@ function ncduinstall(){
 # Etat de la memoire
 function memory_check() {
   echo ""
-	 echo -e "${orange} [ ########## [ Utilisation de la memoire sur${clear}${red} ${server_name}${clear}${orange} ########## ]${clear} "
+	 echo -e "${orange} [ _____ [ Utilisation de la memoire sur${clear}${red} ${server_name}${clear}${orange} _____ ]${clear} "
   echo ""
 	   free -h
 	echo ""
@@ -30,7 +30,7 @@ function memory_check() {
 # Charge du Microprocesseur
 function cpu_check() {
     echo ""
-	     echo -e "${orange} [ ########## [ Chage du CPU sur${clear}${red} ${server_name}${clear}${orange} ########## ]${clear} "
+	     echo -e "${orange} [ _____ [ Chage du CPU sur${clear}${red} ${server_name}${clear}${orange} _____ ]${clear} "
     echo ""
 	     uptime
     echo ""
@@ -39,7 +39,7 @@ function cpu_check() {
 # Nombres de connexion active (pas utilisée dans le script info-systeme.sh)
 function tcp_check() {
     echo ""
-	      echo -e "${orange} [ ########## [ Connections TCP sur${clear}${red} ${server_name}${clear}${orange} ########## ]${clear} "
+	      echo -e "${orange} [ _____ [ Connections TCP sur${clear}${red} ${server_name}${clear}${orange} _____ ]${clear} "
     echo ""
 	     cat  /proc/net/tcp | wc -l
     echo ""
@@ -48,7 +48,7 @@ function tcp_check() {
 # Version du noyau actif
 function kernel_check() {
   echo ""
-	   echo -e "${orange} [ ########## [ Version du noyau sur${clear}${red} ${server_name}${clear}${orange} ########## ]${clear} "
+	   echo -e "${orange} [ _____ [ Version du noyau sur${clear}${red} ${server_name}${clear}${orange} _____ ]${clear} "
 	echo ""
 	   uname -r
   echo ""
@@ -98,11 +98,12 @@ fi
 function checkdisk()
 {
   echo ""
-	   echo -e "${orange} [ ########## [ Espace disque disponible sur${clear}${red} ${server_name}${clear}${orange} ########## ]${clear} "
+	   echo -e "${orange} [ _____ [ Espace disque disponible sur${clear}${red} ${server_name}${clear}${orange} _____ ]${clear} "
 	echo ""
 
   for disk in $(df |grep dev |grep -v tmpfs |grep -v udev| awk -F" " '{print $1}' | cut -d/ -f3)
       do
+        echo -e "Pris / Dispo"
         echo $disk
 
           space_use=$(df -Th | grep "$disk" | awk -F" " '{print $4 " / " $5}' | cut -d% -f1)
@@ -115,7 +116,7 @@ function checkdisk()
 function usedisk()
 {
   echo ""
-     echo -e "${orange} [ ########## [ Volume utiliser dans /var de${clear}${red} ${server_name}${clear}${orange} ########## ]${clear} "
+     echo -e "${orange} [ _____ [ Volume utiliser dans /var de${clear}${red} ${server_name}${clear}${orange} _____ ]${clear} "
   echo ""
 
     espacevar=$(du -sh /var)
@@ -134,7 +135,7 @@ function internetok()
 {
 echo ""
   #echo -e "$(ColorOrange '########## [  Etat de la connexion internet ] ##########')"
-  echo -e "${orange} [ ########## [ Etat de la connexion internet sur${clear}${red} ${server_name}${clear}${orange} ########## ]${clear} "
+  echo -e "${orange} [ _____  Etat de la connexion internet sur${clear}${red} ${server_name}${clear}${orange} _____ ]${clear} "
 echo ""
 
   nc -z 8.8.8.8 53  >/dev/null 2>&1
@@ -163,16 +164,16 @@ echo ""
 function convertjpg2png()
 {
   echo ""
-    echo -e "${ColorOrange} [ ########## [ Convertion d images jpg vers png ] ########## ]${clear} "
+    echo -e "${orange} [ _____  Convertion d images jpg vers png  _____ ]${clear}"
   echo ""
 
   MONDOSSIER=$(pwd)
 
   echo -e "$(ColorOrange '[ Entrer le nom du dossier contenant les images .jpg a convertir: ]')"
-  echo -e "${green} [ Mettre le ${greenbold}chemin complet${clear}${green} du dossier. Exemple Images/test/ ]${clear} "
-    read Enter
-      cd $HOME/$Enter
-
+  #echo -e "${green} [ Mettre le ${greenbold}chemin complet${clear}${green} du dossier. Exemple Images/test/ ]${clear} "
+    read -p " Exemple Images/test/ : " Entrer
+      cd $HOME/$Entrer
+    echo ""
     for image in *.jpg; do
         convert "$image" "${image%.jpg}.png"; echo “image $image converted to ${image%.jpg}.png ”;
     done
@@ -184,12 +185,12 @@ function convertjpg2png()
 function ncdudiskusage()
 {
   echo ""
-      echo -e "${orange} [ ########## [ Controle volume dossier ou partition sur ${clear}${red} ${server_name}${clear}${orange} ########## ]${clear} "
+      echo -e "${orange} [ _____ [ Controle volume dossier ou partition sur ${clear}${red} ${server_name}${clear}${orange} _____ ]${clear} "
   echo ""
 
-  echo -e "$(ColorOrange '[ Entrer le chemin du dossier a scaner: ]')"
-  echo -e "${green} [ Mettre le ${greenbold}chemin complet${clear}${green} du dossier. Exemple /var/log ]${clear} "
   echo -e "$(ColorGreen '[ Pour sortir de l interface ncurse appuyer sur "q" ]')"
-    read Entrer
-      ncdu $Entrer
+  echo ""
+  echo -e "$(ColorOrange '[ Entrer le chemin du dossier a scaner: ]')"
+    read -p " Exemple /var/log/ : " Entrer
+        ncdu $Entrer
 }
