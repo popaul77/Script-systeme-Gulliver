@@ -1,4 +1,5 @@
-# Script-systeme-Gulliver
+# Script-systeme-Gulliver (by jpg www.popaul77.org)
+
 Le script info-systeme.sh utilise les fonctions de fonctions.sh pour verifier l'état de certaine partie du systeme
 
 CPU, Mémoire, Disque dur, Espace "/var", Etat du réseau, et plus.
