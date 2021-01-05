@@ -106,7 +106,6 @@ echo -ne " My First Menu
 	        5) all_checks ; menu ;;
 		      0) exit 0 ;;
           * ) clear ; incorrect_selection ; press_enter ;;
-		      #*) echo -e $red "Wrong option." $clear; "Wrong Command." ;;
         esac
 }
 
