@@ -8,16 +8,17 @@
 ## nom de la machine
 server_name=$(hostname)
 
+#_________________________________________________
 # Verifier que ncdu est installer
-function ncduinstall(){
+function ncduinstall() {
   if [ $(dpkg-query -W -f='${Status}' ncdu 2>/dev/null | grep -c "ok installed") -eq 0 ];
   then
     echo -e "$(ColorRed '[ Le paquet NCDU n est pas installé. Installer le avant de continuer ]')"
     exit 0
   fi
-
 }
 
+#_________________________________________________
 # Etat de la memoire
 function memory_check() {
   echo ""
@@ -27,6 +28,7 @@ function memory_check() {
 	echo ""
 }
 
+#_________________________________________________
 # Charge du Microprocesseur
 function cpu_check() {
     echo ""
@@ -36,6 +38,7 @@ function cpu_check() {
     echo ""
 }
 
+#_________________________________________________
 # Nombres de connexion active (pas utilisée dans le script info-systeme.sh)
 function tcp_check() {
     echo ""
@@ -45,6 +48,7 @@ function tcp_check() {
     echo ""
 }
 
+#_________________________________________________
 # Version du noyau actif
 function kernel_check() {
   echo ""
@@ -54,6 +58,7 @@ function kernel_check() {
   echo ""
 }
 
+#_________________________________________________
 # Tous les tests
 function all_checks() {
 	memory_check
@@ -64,6 +69,7 @@ function all_checks() {
   ncdudiskusage
 }
 
+#_________________________________________________
 # suis je ROOT sur cette machine
 function checkuid()
 {
@@ -79,6 +85,7 @@ function checkuid()
 fi
 }
 
+#_________________________________________________
 # Qui suis je sur cette machine
 function checkuiduser()
 {
@@ -94,6 +101,7 @@ function checkuiduser()
 fi
 }
 
+#_________________________________________________
 # Verification de l'espace utilisé et disponible sur les disques de la machine
 function checkdisk()
 {
@@ -112,6 +120,7 @@ function checkdisk()
       done
 }
 
+#_________________________________________________
 # Verification du volume du dossier var
 function usedisk()
 {
@@ -127,9 +136,9 @@ function usedisk()
     echo $espacevar
     echo $espacevarlib
     echo $espacevarcache
-
 }
 
+#_________________________________________________
 # Verification de l'etet de la connexion internet
 function internetok()
 {
@@ -160,6 +169,7 @@ echo ""
       fi
 }
 
+#_________________________________________________
 # Conversion d'images par lot de jpg a png modifiable juste en changeant l'extension
 function convertjpg2png()
 {
@@ -181,6 +191,7 @@ function convertjpg2png()
   cd $MONDOSSIER
 }
 
+#_________________________________________________
 # Utilisation de ncdu pour connaitre l'etat d'occupation des dossiers
 function ncdudiskusage()
 {
@@ -194,3 +205,5 @@ function ncdudiskusage()
     read -p " Exemple /var/log/ : " Entrer
         ncdu $Entrer
 }
+
+#_________________________________________________
