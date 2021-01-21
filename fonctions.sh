@@ -205,12 +205,13 @@ function ncdudiskusage()
 
 #_________________________________________________
 #Renommer des fichiers en masse (remplace un espace par un _ )
-function renomer()
+#ls|while read file;do mv "$file" "$(echo "$file"|sed -e 's/\ /_/g')"; done
+function rename()
 {
 ls | while read file
   do
       mv "$file" "$(echo "$file" | sed -e 's/\ /_/g')"
-  done
+  done 2>/dev/null
 }
 
 #_________________________________________________
@@ -219,7 +220,7 @@ function find-texte ()
 {
   #find . -type f \( -iname '*.txt' -o -iname '*.pp' \) -print0 | xargs -0 grep -i "$1"
   #find . -type f \( -iname '*.txt' \) -print0 | xargs -0 grep -i "$1"
-  
+
   grep $1 *.txt | cut -d: -f1 | more
 }
 
