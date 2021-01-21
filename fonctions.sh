@@ -9,7 +9,7 @@
 server_name=$(hostname)
 
 #_________________________________________________
-# Verifier que ncdu est installer
+# Verifier que ncdu est installé
 function ncduinstall() {
   if [ $(dpkg-query -W -f='${Status}' ncdu 2>/dev/null | grep -c "ok installed") -eq 0 ];
   then
@@ -73,15 +73,12 @@ function all_checks() {
 # suis je ROOT sur cette machine
 function checkuid()
 {
-  if [ "$UID" -ne "0" ]
-
+if [ "$UID" -ne "0" ]
     then
           echo -e "$(ColorRed '[ ERROR ]')" "Vous devez etre root pour lancer cette commande......."
           exit 0
-
     else
           echo -e "$(ColorGreen '[ UID ROOT OK ]')" " L'execution peut continuer........"
-
 fi
 }
 
@@ -139,7 +136,7 @@ function usedisk()
 }
 
 #_________________________________________________
-# Verification de l'etet de la connexion internet
+# Verification de l'etat de la connexion internet
 function internetok()
 {
 echo ""
@@ -207,3 +204,24 @@ function ncdudiskusage()
 }
 
 #_________________________________________________
+#Renommer des fichiers en masse (remplace un espace par un _ )
+function renomer()
+{
+ls | while read file
+  do
+      mv "$file" "$(echo "$file" | sed -e 's/\ /_/g')"
+  done
+}
+
+#_________________________________________________
+#lister les fichiers .txt contenant un texte precis.
+function find-texte ()
+{
+  #find . -type f \( -iname '*.txt' -o -iname '*.pp' \) -print0 | xargs -0 grep -i "$1"
+  #find . -type f \( -iname '*.txt' \) -print0 | xargs -0 grep -i "$1"
+  
+  grep $1 *.txt | cut -d: -f1 | more
+}
+
+#_________________________________________________
+#
